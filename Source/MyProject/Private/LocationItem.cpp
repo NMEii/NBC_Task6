@@ -1,9 +1,11 @@
-﻿
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
-#include "RotationActor.h"
 
-ARotationActor::ARotationActor()
+#include "LocationItem.h"
+
+ALocationItem::ALocationItem()
 {
+ 	
 	PrimaryActorTick.bCanEverTick = true;
 
 	// SceneComponent를 생성하고 루트 설정
@@ -14,42 +16,30 @@ ARotationActor::ARotationActor()
 	StaticMeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComp"));
 	StaticMeshComp->SetupAttachment(SceneComp);
 
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Engine/BasicShapes/Cube.Cube"));
 
-
-	if (MeshAsset.Succeeded())	// 파일 찾기 성공시
+	if (MeshAsset.Succeeded())
 	{
 		StaticMeshComp->SetStaticMesh(MeshAsset.Object);
 	}
 
 	static ConstructorHelpers::FObjectFinder<UMaterial> MaterialAsset(TEXT("/Game/Material/M_Basic.M_Basic"));
 
-	if (MaterialAsset.Succeeded()) // 파일 찾기 성공시
+	if (MaterialAsset.Succeeded())
 	{
 		StaticMeshComp->SetMaterial(0, MaterialAsset.Object);
 	}
-	SetActorScale3D(FVector(1.0f, 1.0f, 30.0f));
-	SetActorRotation(FRotator(90.0f, 0.0f, 0.0f));
 }
 
-void ARotationActor::BeginPlay()
+void ALocationItem::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
-void ARotationActor::Tick(float DeltaTime)
+void ALocationItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (!FMath::IsNearlyZero(RotationSpeed))
-	{
-		Rotating(DeltaTime);
-	}
-}
-
-void ARotationActor::Rotating(float DeltaTime)
-{
-	AddActorLocalRotation(FRotator(0.0f, 0.0f, RotationSpeed * DeltaTime));
 }
 
