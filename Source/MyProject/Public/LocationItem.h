@@ -20,8 +20,19 @@ protected:
 	USceneComponent* SceneComp;
 	UStaticMeshComponent* StaticMeshComp;
 
-	virtual void BeginPlay() override;
+	FVector StartLocation;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|MaxDistance");
+	float MaxDistance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|MoveDirection");
+	FVector MoveDirection;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|MovingSpeed");
+	float MovingSpeed = 20.0f;
+
+	virtual void BeginPlay() override;
+	void MoveActor(float DeltaTime);
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

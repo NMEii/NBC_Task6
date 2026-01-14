@@ -28,7 +28,7 @@ ARotationActor::ARotationActor()
 	{
 		StaticMeshComp->SetMaterial(0, MaterialAsset.Object);
 	}
-	SetActorScale3D(FVector(1.0f, 1.0f, 30.0f));
+	SetActorScale3D(FVector(0.8f, 0.8f, 30.0f));
 	SetActorRotation(FRotator(90.0f, 0.0f, 0.0f));
 }
 
