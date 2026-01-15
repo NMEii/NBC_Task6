@@ -18,9 +18,13 @@ public:
 
 
 protected:
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Item|Componenets");
 	USceneComponent* SceneComp;				// 루트 컴포넌트
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Item|Components");
 	UStaticMeshComponent* StaticMeshComp;	// 스태틱 매시 컴포넌트
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|RotationSpeed");
 	float RotationSpeed = 90.0f;
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

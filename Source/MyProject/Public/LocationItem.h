@@ -16,8 +16,10 @@ public:
 	ALocationItem();
 
 protected:
-	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Item|Componenets");
 	USceneComponent* SceneComp;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Item|Components");
 	UStaticMeshComponent* StaticMeshComp;
 
 	FVector StartLocation;
@@ -31,10 +33,15 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|MovingSpeed");
 	float MovingSpeed = 20.0f;
 
+	FTimerHandle SpawnTimerHandle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|LoopCycle");
+	float LoopCycle = 1.0f;
+
 	virtual void BeginPlay() override;
-	void MoveActor(float DeltaTime);
+	void MoveActor();
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	//virtual void Tick(float DeltaTime) override;
 
 };

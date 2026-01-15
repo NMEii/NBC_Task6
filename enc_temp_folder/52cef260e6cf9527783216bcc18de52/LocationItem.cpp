@@ -34,9 +34,6 @@ ALocationItem::ALocationItem()
 	{
 		StaticMeshComp->SetMaterial(0, MaterialAsset.Object);
 	}
-
-	SetActorScale3D(FVector(4.0f, 6.0f, 0.5f));
-
 }
 
 void ALocationItem::BeginPlay()
@@ -48,7 +45,7 @@ void ALocationItem::BeginPlay()
 	// 방향은 제곱의 값이 1이여야 함. 
 	MoveDirection.Normalize();	// 크기를 1로 만드는 함수. 즉, 방향 벡터만 남기는 함수.
 
-	FVector ForwardVector = FVector(1.0f, 0.0f, 0.0f);
+	FVector ForwardVector = GetActorForwardVector();
 
 	// 전방 벡터 삽입
 	MoveDirection.X *= ForwardVector.X;	
@@ -58,7 +55,7 @@ void ALocationItem::BeginPlay()
 	GetWorld()->GetTimerManager().SetTimer(
 		SpawnTimerHandle,			// 1. 타이머 핸들 (나중에 멈출 때 사용)
 		this,						// 2. 이 함수를 소유한 객체
-		&ALocationItem::MoveActor,	// 3. 실행할 함수의 주소
+		&ALocationItem::MoveActor,		// 3. 실행할 함수의 주소
 		LoopCycle,                  // 4. 실행 주기 (기본값 1.0초마다)
 		true);
 
