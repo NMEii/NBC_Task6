@@ -9,7 +9,7 @@ ALocationItem::ALocationItem()
 	PrimaryActorTick.bCanEverTick = false;
 
 	StartLocation = FVector::ZeroVector;
-	MaxDistance = 50.0f;
+	MaxDistance = 1000.0f;
 	MoveDirection = FVector::ForwardVector;
 
 	// SceneComponent를 생성하고 루트 설정
@@ -50,11 +50,6 @@ void ALocationItem::BeginPlay()
 
 	FVector ForwardVector = FVector(1.0f, 0.0f, 0.0f);
 
-	// 전방 벡터 삽입
-	MoveDirection.X *= ForwardVector.X;	
-	MoveDirection.Y *= ForwardVector.Y;		
-	MoveDirection.Z *= ForwardVector.Z;		
-
 	GetWorld()->GetTimerManager().SetTimer(
 		SpawnTimerHandle,			// 1. 타이머 핸들 (나중에 멈출 때 사용)
 		this,						// 2. 이 함수를 소유한 객체
@@ -67,7 +62,7 @@ void ALocationItem::BeginPlay()
 void ALocationItem::MoveActor()
 {
 	FVector CurrentLocation = GetActorLocation();
-	FVector MoveLocation = CurrentLocation + (MovingSpeed * MoveDirection * GetWorld()->GetDeltaSeconds());
+	FVector MoveLocation = CurrentLocation + (MovingSpeed * MoveDirection * LoopCycle);
 	
 	// 이동거리
 	FVector Distance = CurrentLocation - StartLocation;

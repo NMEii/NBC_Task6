@@ -31,12 +31,12 @@ protected:
 	FVector MoveDirection;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|MovingSpeed");
-	float MovingSpeed = 20.0f;
+	float MovingSpeed = 150.0f;
 
 	FTimerHandle SpawnTimerHandle;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|LoopCycle");
-	float LoopCycle = 1.0f;
+	float LoopCycle = 0.03f;
 
 	virtual void BeginPlay() override;
 	void MoveActor();
